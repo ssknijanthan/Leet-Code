@@ -1,0 +1,26 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+            dummy=ListNode()
+            cur=dummy
+            carry=0
+            sum=0
+            while l1 or l2 or carry:
+                v1 = l1.val if l1 else 0
+                v2 = l2.val if l2 else 0
+                sum=v1+v2+carry
+                carry=sum//10
+                sum=sum%10
+                cur.next=ListNode(val=sum)
+                cur=cur.next
+                l1=l1.next if l1 else None
+                l2=l2.next if l2 else None
+            return dummy.next
+
+"""Intuition: The basic intuition is to create a dummy node and assign it to cur to avoid handline extra edge cases, and since the numbers
+in linked list are reversed we can conveniently directly sum up the values of l1 and l2 list and assign it to cur node. The reason to use 
+carry carry is if the sum value is bigger than 10 then we need to add the remaining value to the next node"""
