@@ -1,0 +1,18 @@
+class Solution:
+    def lengthOfLongestSubstring(self,s: str) -> int:
+        charSet=set()
+        l=0
+        res=0
+        for r in range(len(s)):
+            while s[r] in charSet:
+                charSet.remove(s[l])
+                l+=1
+            charSet.add(s[r])
+            res=max(res,r-l+1)
+        return res
+
+"""Intuition: Traverse the characters of the string s. As we encounter each character, we track them using a set data structure, 
+ensuring uniqueness. When encountering a character that is already in the set, it signifies the start of a repeated character 
+sequence. At this point, we adjust the left pointer (l) to count no of characters excluded from set, moving forward in the string 
+until the character is no longer repeated. The length of the current substring (ending at index r) is determined by r - l + 1.
+We continuously update the maximum length (res) as we iterate through the string, ensuring it reflects the longest substring encountered so far."""
