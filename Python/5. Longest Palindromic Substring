@@ -1,0 +1,32 @@
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        resLen=0
+        res=0
+        for i in range(len(s)):
+            #odd palindrome logic
+            l,r=i,i
+            while l>=0 and r<len(s) and s[l]==s[r]:
+                if r-l+1>resLen:
+                    res=s[l:r+1]
+                    resLen=r-l+1
+                l-=1
+                r+=1
+            #even palindrom logic
+            l,r=i,i+1
+            while l>=0 and r<len(s) and s[l]==s[r]:
+                if r-l+1>resLen:
+                    res=s[l:r+1]
+                    resLen=r-l+1
+                l-=1
+                r+=1
+        return res
+"""Intuition: 2 pointer approach and since the longest palindrome of a string can start 
+from any index we loop through each index and assign l,r to index i bcz in odd palindromes 
+the center of the string will be index i but in even palindromes their is no exact center to 
+we initialise l and r by 2 consectutive characters to search whether characters at both index are equal of not.
+If r-l+1(Indicates the length of the substring starting from left index l to right index r) is greater then existing
+resLen then we update result string and resLen"""
+
+
+
+        
